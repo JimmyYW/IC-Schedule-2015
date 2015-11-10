@@ -60,18 +60,32 @@ class Section(db.Model):
     __tablename__ = 'section'
     id = db.Column(db.Integer, primary_key=True)
     crn = db.Column(db.Integer)
-    # time = ????????
     prof = db.Column(db.String(64))
     course = db.Column(db.Integer, db.ForeignKey('course.id'))
 
-    def __init__(self, crn, time, prof, course):
+    def __init__(self, crn, prof, course):
         self.crn = crn
-        self.time = time
         self.prof = prof
         self.course = course
 
     def __repr__(self):
         return "<Course %r>" % self.crn
+
+
+class Time(db.Model):
+    __tablename__ = 'time'
+    id = db.Column(db.Integer, primary_key=True)
+    timeStart = db.Column(db.Time)
+    timeEnd = db.Column(db.Time)
+    day = db.Column(db.Integer)  # 0=Sunday, 6=Saturday
+
+
+class SectionToTime(db.Model):
+    __tablename__ = 'section2time'
+    id = db.Column(db.Integer, primary_key=True)
+    timeId = db.Column(db.Integer, db.ForeignKey('time.id'))
+    sectionId = db.Column(db.Integer, db.ForeignKey('section.id'))
+
 
 db.create_all()
 db.session.commit()
