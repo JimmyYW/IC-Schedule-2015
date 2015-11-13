@@ -132,7 +132,6 @@ def main():
     populate_db()
 
 
-main()
-
-
+if __name__ == "__main__":
+    main()
 
