@@ -44,7 +44,9 @@ class Course(db.Model):
     desc = db.Column(db.String(256))
     number = db.Column(db.Integer)
     credits = db.Column(db.Integer)
-    dept = db.Column(db.Integer, db.ForeignKey('dept.id'))
+    deptId = db.Column(db.Integer, db.ForeignKey('dept.id'))
+
+    dept = db.relationship('Dept', foreign_keys=deptId)
 
     def __init__(self, name, desc, number, credits, dept):
         self.name = name
@@ -62,7 +64,9 @@ class Section(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     crn = db.Column(db.Integer)
     prof = db.Column(db.String(64))
-    course = db.Column(db.Integer, db.ForeignKey('course.id'))
+    courseId = db.Column(db.Integer, db.ForeignKey('course.id'))
+
+    course = db.relationship('Course', foreign_keys=courseId)
 
     def __init__(self, crn, prof, course):
         self.crn = crn
@@ -83,7 +87,7 @@ class Time(db.Model):
     def __init__(self, start, end, day):
         self.timeStart = start
         self.timeEnd = end
-        self.course = day
+        self.day = day
 
     def __repr__(self):
         return "<Time %r>" % self.id
@@ -95,9 +99,12 @@ class SectionToTime(db.Model):
     timeId = db.Column(db.Integer, db.ForeignKey('time.id'))
     sectionId = db.Column(db.Integer, db.ForeignKey('section.id'))
 
-    def __init__(self, sectionId, timeId):
-        self.timeId = timeId
-        self.sectionId = sectionId
+    time = db.relationship('Time', foreign_keys=timeId)
+    section = db.relationship('Section', foreign_keys=sectionId)
+
+    def __init__(self, section, time):
+        self.time = time
+        self.section = section
 
     def __repr__(self):
         return "<SectionToTime %r>" % self.id
@@ -109,10 +116,10 @@ db.session.commit()
 
 def populate_db():
     dept = Dept("Computer Science", "COMP")
-    course = Course("Adv. Web", "Doug rocks", 20500, 4, dept.id)
-    section = Section(12345, "Doug", course.id)
+    course = Course("Adv. Web", "Doug rocks", 20500, 4, dept)
+    section = Section(12345, "Doug", course)
     time = Time(dt.time(14, 0), dt.time(14, 50), 1)
-    section2time = SectionToTime(section.id, time.id)
+    section2time = SectionToTime(section, time)
     db.session.add(dept)
     db.session.add(course)
     db.session.add(section)
