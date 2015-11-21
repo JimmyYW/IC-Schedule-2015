@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 
-{% block page_content %}
+{% block dept_content %}
+<ul>
+    {% for dept in depts %}
+        <li><button>{{ dept.name }}</button></li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block course_content %}
     <ul>
     {% for course in courses %}
         <li><button data-toggle="modal" data-target="#c{{ str(course.id) }}">{{ course.name }}</button></li>
@@ -17,7 +25,11 @@
               <div class="modal-body">
                   <h2>{{ course.name }}</h2>
                   <p>{{ course.desc }}</p>
-                  <!--- INSERT SECTIONS -->
+                  <ul>
+                      {% for section in sections %}
+                          <li>{{ section.id }}</li>
+                      {% endfor %}
+                  </ul>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
