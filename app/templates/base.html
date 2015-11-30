@@ -1,14 +1,11 @@
-{% extends "bootstrap/base.html" %}
-
-{% block title %}IC Schedulizer{% endblock %}
-
-{% block head %}
-{{ super() }}
-    <!-- ADD A FAVICON??-->
-    <link rel="stylesheet" href="style.css" type="text/css">
-{% endblock %}
-
-{% block content %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="department-Type" department="text/html; charset=utf-8">
+		<title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="../static/style.css" type="text/css">
+    </head>
+    <body>
 		<header id="header">
 			<div class="innertube">
 				<h1>IC Schedulizer</h1>
@@ -87,10 +84,5 @@
                 {% block selected_classes %}{% endblock %}
 			</div>
 		</footer>
-
-{% endblock %}
-
-{% block scripts %}
-{{ super() }}
-{{ moment.include_moment() }}
-{% endblock %}
+    </body>
+</html>
