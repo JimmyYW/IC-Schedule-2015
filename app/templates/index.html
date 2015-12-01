@@ -3,7 +3,7 @@
 {% block dept_content %}
 <ul>
     {% for dept in depts %}
-        <li><button class="btn btn-primary btn-sm">{{ dept.name }}</button></li>
+        <li><button class="btn btn-primary btn-sm" id="{{ dept.name[0] }}">{{ dept.name }}</button></li>
     {% endfor %}
 </ul>
 {% endblock %}
@@ -11,7 +11,7 @@
 {% block course_content %}
     <ul>
     {% for course in courses %}
-        <li><button type="button" class=" btn btn-primary btn-sm" data-toggle="modal" data-target="#c{{ course.id }}">{{ course.name }}</button></li>
+        <li><button type="button" data-toggle="modal" data-target="#c{{ course.id }}">{{ course.name }}</button></li>
     {% endfor %}
     </ul>
     {% for course in courses %}
@@ -19,7 +19,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="btn btn-primary close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="clabel{{ course.id }}">{{ course.name }}</h4>
               </div>
               <div class="modal-body">
