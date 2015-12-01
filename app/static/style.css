@@ -57,6 +57,7 @@ main {
     height: 300px
     overflow-y: scroll;
     overflow-x: hidden;
+    position: relative;
 }
 
 .innertube {

@@ -3,7 +3,7 @@
 {% block dept_content %}
 <ul>
     {% for dept in depts %}
-        <li><button>{{ dept.name }}</button></li>
+        <li><button id="{{ dept.name[0] }}">{{ dept.name }}</button></li>
     {% endfor %}
 </ul>
 {% endblock %}
