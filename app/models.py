@@ -1,26 +1,5 @@
-__author__ = 'Kelly'
-
-from flask import Flask
-from flask.ext.script import Manager
-from flask.ext.bootstrap import Bootstrap
-from flask.ext.moment import Moment
-from flask.ext.sqlalchemy import SQLAlchemy
-import os
+from app import db
 import datetime as dt
-
-basedir = os.path.abspath(os.path.dirname(__file__))
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = "The peperonizzi always try photogreph me in compromisin position. Unlucky for them" \
-                           "my head will be soon unstuck from this sodacan. Any minut"
-app.config['SQLALCHEMY_DATABASE_URI'] =\
-    'sqlite:///' + os.path.join(basedir, 'data.sqlite')
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-
-manager = Manager(app)
-bootstrap = Bootstrap(app)
-moment = Moment(app)
-db = SQLAlchemy(app)
 
 
 class Dept(db.Model):
@@ -108,10 +87,6 @@ class SectionToTime(db.Model):
 
     def __repr__(self):
         return "<SectionToTime %r>" % self.id
-
-
-db.create_all()
-db.session.commit()
 
 
 def populate_db():
