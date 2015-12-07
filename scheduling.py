@@ -47,6 +47,7 @@ class Schedulizer:
     def __init__(self, clist):
         self.clist = clist
         self.cdict, self.sdict = self.make_dicts()
+        self.sched_list = list()
 
     def make_dicts(self):
         course_dict = dict()
@@ -76,26 +77,36 @@ class Schedulizer:
                 break
         return invalid
 
+    def get_section_from_idx(self, cidx, i):
+        course = self.clist[cidx]
+        return self.cdict[course][i]
+
+    def check_all_sections(self, current_idcs):
+        valid = True
+        schedule = list()
+        for i in range(len(self.clist)-1):
+            for j in range(i+1, len(self.clist)):
+                s1 = self.get_section_from_idx(i, current_idcs[i])
+                s2 = self.get_section_from_idx(j, current_idcs[j])
+                if self.find_conflicts(s1, s2):
+                    print("Schedule "+str(current_idcs)+" is invalid; "
+                          "sections "+str(s1)+" and "+str(s2)+" conflict.")
+                    valid = False
+                    break
+
+            if not valid:
+                break
+            # at this point, section at i has been tested against all other sections and is valid.
+            schedule.append(self.get_section_from_idx(i, current_idcs[i]))
+        if valid:
+            # add that one last section that was good to schedule; couldn't be done before.
+            schedule.append(self.get_section_from_idx(len(self.clist)-1, current_idcs[len(self.clist)-1]))
+            print("Good schedule: "+str(schedule))
+            self.sched_list.append(schedule)
+
     def recursive_looping_sucks(self, maxes, current_idcs):
         if len(maxes) == 0:
-            valid = True
-            for i in range(len(self.clist)-1):
-                for j in range(i+1, len(self.clist)):
-                    s1times = self.cdict[self.clist[i]]
-                    index1 = current_idcs[i]
-                    s2times = self.cdict[self.clist[j]]
-                    index2 = current_idcs[j]
-                    s1 = s1times[index1]
-                    s2 = s2times[index2]
-                    if self.find_conflicts(s1, s2):
-                        print("Schedule "+str(current_idcs)+" is invalid; "
-                              "sections "+str(s1)+" and "+str(s2)+" conflict.")
-                        valid = False
-                        break
-                if not valid:
-                    break
-            if valid:
-                print("Schedule "+str(current_idcs)+" is cool.")
+            self.check_all_sections(current_idcs)
         else:
             for i in range(maxes[0]):
                 if current_idcs is None:
@@ -112,6 +123,7 @@ def generate_schedules(clist):
     # stack overflow tells me to be hacky and recursive. say no more, stack overflow
     maxes = [len(sch.cdict[c]) for c in sch.clist]
     sch.recursive_looping_sucks(maxes, list())
+    print(sch.sched_list)
 
 
 def has_conflict(time1, time2):
