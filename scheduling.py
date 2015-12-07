@@ -1,4 +1,5 @@
 from app.models import Course, SectionToTime, Time, Section
+import copy
 
 """
 ALGORITHM
@@ -20,6 +21,11 @@ TAKE TWO
 3. Increment a section, rinse, repeat
 
 Comparing and looping with an unknown number of classes is going to be tricky, but I'm going to launch right in.
+
+A BETTER FORMAT for organizing things with multiple data structures:
+1. course list (comes straight from selected classes)
+2. course:section dict of lists
+3. section:time dict of lists
 """
 
 
@@ -37,6 +43,91 @@ def make_selected_dict(courses):
     return selected
 
 
-selected = make_selected_dict(Course.query.all())
-print(selected)
+class Schedulizer:
+    def __init__(self, clist):
+        self.clist = clist
+        self.cdict, self.sdict = self.make_dicts()
+
+    def make_dicts(self):
+        course_dict = dict()
+        section_dict = dict()
+        for c in self.clist:
+            sectionlist = Section.query.filter_by(courseId=c.id)
+            course_dict[c] = list()
+            for s in sectionlist:
+                course_dict[c].append(s)
+                s2ts = SectionToTime.query.filter_by(sectionId=s.id)
+                timelist = list()
+                for s2t in s2ts:
+                    timelist.append(Time.query.get(s2t.timeId))
+                section_dict[s] = timelist
+        return course_dict, section_dict
+
+    def find_conflicts(self, s1, s2):
+        times1 = self.sdict[s1]
+        times2 = self.sdict[s2]
+        invalid = False
+        for t1 in times1:
+            for t2 in times2:
+                if has_conflict(t1, t2):
+                    invalid = True
+                    break
+            if invalid:
+                break
+        return invalid
+
+    def recursive_looping_sucks(self, maxes, current_idcs):
+        if len(maxes) == 0:
+            valid = True
+            for i in range(len(self.clist)-1):
+                for j in range(i+1, len(self.clist)):
+                    s1times = self.cdict[self.clist[i]]
+                    index1 = current_idcs[i]
+                    s2times = self.cdict[self.clist[j]]
+                    index2 = current_idcs[j]
+                    s1 = s1times[index1]
+                    s2 = s2times[index2]
+                    if self.find_conflicts(s1, s2):
+                        print("Schedule "+str(current_idcs)+" is invalid; "
+                              "sections "+str(s1)+" and "+str(s2)+" conflict.")
+                        valid = False
+                        break
+                if not valid:
+                    break
+            if valid:
+                print("Schedule "+str(current_idcs)+" is cool.")
+        else:
+            for i in range(maxes[0]):
+                if current_idcs is None:
+                    new_idcs = [i]
+                else:
+                    new_idcs = list(current_idcs)
+                    new_idcs.append(i)
+                self.recursive_looping_sucks(maxes[1:], new_idcs)
+
+
+def generate_schedules(clist):
+    sch = Schedulizer(clist)
+    # how do i dynamically generate enough for loops for this nonsense
+    # stack overflow tells me to be hacky and recursive. say no more, stack overflow
+    maxes = [len(sch.cdict[c]) for c in sch.clist]
+    sch.recursive_looping_sucks(maxes, list())
+
+
+def has_conflict(time1, time2):
+    # DID YOU KNOW YOU CAN CHAIN BOOLEAN EXPRESSIONS LIKE THIS IN PYTHON????? MY MATH BRAIN IS SO SATISFIED
+    if (time1.timeStart <= time2.timeStart <= time1.timeEnd or time2.timeStart <= time1.timeStart <= time2.timeEnd)\
+            and (time1.day == time2.day):
+        return True
+    else:
+        return False
+
+
+def main():
+    clist = Course.query.all()
+    generate_schedules(clist)
+
+
+if __name__ == "__main__":
+    main()
 

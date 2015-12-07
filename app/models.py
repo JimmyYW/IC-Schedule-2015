@@ -53,7 +53,7 @@ class Section(db.Model):
         self.course = course
 
     def __repr__(self):
-        return "<Course %r>" % self.crn
+        return "<Section %r>" % self.crn
 
 
 class Time(db.Model):
