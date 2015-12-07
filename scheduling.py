@@ -116,14 +116,11 @@ class Schedulizer:
                     new_idcs.append(i)
                 self.recursive_looping_sucks(maxes[1:], new_idcs)
 
-
-def generate_schedules(clist):
-    sch = Schedulizer(clist)
-    # how do i dynamically generate enough for loops for this nonsense
-    # stack overflow tells me to be hacky and recursive. say no more, stack overflow
-    maxes = [len(sch.cdict[c]) for c in sch.clist]
-    sch.recursive_looping_sucks(maxes, list())
-    print(sch.sched_list)
+    def generate_schedules(self):
+        # how do i dynamically generate enough for loops for this nonsense
+        # stack overflow tells me to be hacky and recursive. say no more, stack overflow
+        maxes = [len(self.cdict[c]) for c in self.clist]
+        self.recursive_looping_sucks(maxes, list())
 
 
 def has_conflict(time1, time2):
@@ -137,7 +134,9 @@ def has_conflict(time1, time2):
 
 def main():
     clist = Course.query.all()
-    generate_schedules(clist)
+    sch = Schedulizer(clist)
+    sch.generate_schedules()
+    print(sch.sched_list)
 
 
 if __name__ == "__main__":
