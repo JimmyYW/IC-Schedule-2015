@@ -6,8 +6,8 @@ body {
 }
 
 #header {
-    background: #ccc;
-    height: 100px;
+    background: #18426b;
+    height: 125px;
 }
 
 #header h1 {
@@ -43,7 +43,7 @@ main {
 #footer {
     clear: left;
     width: 100%;
-    background: #ccc;
+    background: #18426b;
     text-align: center;
     padding: 4px 0;
 }
@@ -58,6 +58,7 @@ main {
     overflow-y: scroll;
     overflow-x: hidden;
     position: relative;
+    padding:3px;
 }
 
 .innertube {
@@ -78,4 +79,8 @@ nav ul {
 nav ul a {
     color: darkgreen;
     text-decoration: none;
+}
+
+department ul a {
+
 }

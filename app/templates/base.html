@@ -13,8 +13,8 @@
     <body>
 		<header id="header">
 			<div class="innertube">
-				<h1>IC Schedulizer</h1>
-                <p>Classes &nbsp;&nbsp;&nbsp;&nbsp; Schedules</p>
+                <img src="{{ url_for('static', filename = 'img/header.jpg') }}">
+                <p><img src="../static/img/classes.jpg" alt="Classes Button"> &nbsp;&nbsp;&nbsp;&nbsp; <img src="../static/img/schedule.jpg" alt="Schedule Button"></p>
 			</div>
 		</header>
 
@@ -85,7 +85,7 @@
 		</div>
 		<footer id="footer">
 			<div class="innertube">
-				<p>Selected Classes</p>
+				<p><img src="../static/img/footer.jpg" alt="Scheduled Classes Footer"></p>
                 {% block selected_classes %}{% endblock %}
 			</div>
 		</footer>
