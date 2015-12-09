@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
 {% block dept_content %}
-<ul>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css')}}" type="text/css">
+
+
     {% for dept in depts %}
-        <li><button class="btn btn-primary btn-sm" id="{{ dept.name[0] }}">{{ dept.name }}</button></li>
+        <a href="#Department" id="{{ dept.name[0] }}">{{ dept.name }}</a>
     {% endfor %}
-</ul>
+
 {% endblock %}
 
 {% block course_content %}
