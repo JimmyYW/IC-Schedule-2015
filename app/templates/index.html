@@ -56,9 +56,11 @@
                   <h2>{{ course.name }}</h2>
                   <p>{{ course.desc }}</p>
                   <ul>
-                    <!--this displays ALL sections regardless of class unfortunately-->
+                    <!--this is probably the hackiest way to do this ever but oh well-->
                       {% for section in sections %}
-                          <li>{{ section.crn }}</li>
+                          {% if section.courseId == course.id %}
+                            <li>{{ section.crn }}</li>
+                          {% endif %}
                       {% endfor %}
                   </ul>
               </div>

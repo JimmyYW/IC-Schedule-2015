@@ -2,8 +2,6 @@ from app import app
 from app.models import Dept, Course, Section, SectionToTime
 from flask import render_template, session, redirect, url_for
 from scheduling import Schedulizer
-from app.forms import AddClassForm
-from wtforms.fields import SubmitField
 
 
 @app.route('/')
