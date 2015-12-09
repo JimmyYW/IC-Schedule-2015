@@ -17,6 +17,7 @@ def index():
 
 @app.route('/schedule')
 def schedule():
-    sch = Schedulizer(Course.query.all())
+    clist = Course.query.all()
+    sch = Schedulizer(clist)
     sch.generate_schedules()
     return render_template('schedule.html', schlist=sch.sched_list)
