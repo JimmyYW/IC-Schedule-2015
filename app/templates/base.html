@@ -12,8 +12,10 @@
     </head>
     <body>
 		<header id="header">
-                <img src="{{ url_for('static', filename = 'img/header.jpg') }}">
-                <p><img src="../static/img/classes.jpg" alt="Classes Button"> &nbsp;&nbsp;&nbsp;&nbsp; <img src="../static/img/schedule.jpg" alt="Schedule Button"></p>
+			<div class="innertube">
+                <a href="/index"><img src="{{ url_for('static', filename = 'img/header.jpg') }}"></a>
+                <p><a href="/index"><img src="../static/img/classes.jpg" href="/index" alt="Classes Button"></a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="/schedule"><img src="../static/img/schedule.jpg" alt="Schedule Button" href="/schedule"></a></p>
+			</div>
 		</header>
 
 		<div id="wrapper">
@@ -41,43 +43,12 @@
 				</div>
 			</main>
 
-
-			<nav id="nav">
-				<div class="innertube">
-					<h3> </h3>
-					<ul>
-						<li><a href="#A">A</a></li>
-						<li><a href="#B">B</a></li>
-						<li><a href="#C">C</a></li>
-						<li><a href="#D">D</a></li>
-						<li><a href="#E">E</a></li>
-						<li><a href="#F">F</a></li>
-						<li><a href="#G">G</a></li>
-						<li><a href="#H">H</a></li>
-						<li><a href="#I">I</a></li>
-						<li><a href="#J">J</a></li>
-						<li><a href="#L">L</a></li>
-						<li><a href="#M">M</a></li>
-						<li><a href="#O">O</a></li>
-						<li><a href="#P">P</a></li>
-						<li><a href="#R">R</a></li>
-						<li><a href="#S">S</a></li>
-						<li><a href="#T">T</a></li>
-						<li><a href="#W">W</a></li>
-
-
-					</ul>
-				</div>
-
-
-			</nav>
+			{% block sideNav %}{% endblock %}
 
 			<nav id="classdiv">
 				<div class="innertube">
 					{% block course_content %}{% endblock %}
 				</div>
-
-
 			</nav>
 
 		</div>
