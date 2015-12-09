@@ -1,6 +1,10 @@
+{% extends "base.html" %}
+
+{% block course_content %}
 
     {% for sch in schlist %}
         {% for s in sch %}
             <p>{{ s.prof }}, CRN {{ s.crn }}</p>
         {% endfor %}
     {% endfor %}
+{% endblock %}
