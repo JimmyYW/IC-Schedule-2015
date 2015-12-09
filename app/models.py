@@ -90,6 +90,7 @@ class SectionToTime(db.Model):
 
 
 def populate_db():
+    """
     dept = Dept("Computer Science", "COMP")
     course = Course("Adv. Web", "Doug rocks", 20500, 4, dept)
     section = Section(12345, "Doug", course)
@@ -100,7 +101,29 @@ def populate_db():
     db.session.add(section)
     db.session.add(time)
     db.session.add(section2time)
+
+    deptcs = Dept.query.get(1)
+    course171 = Course("Principles I", "Learn Python", 17100, 4, deptcs)
+    course172 = Course("Principles II", "Learn Java", 17200, 4, deptcs)
+    section171_1 = Section(17101, "Paul", course171)
+    section171_2 = Section(17102, "John", course171)
+    section172 = Section(17201, "Toby", course172)
+    time11m = Time(dt.time(11, 0), dt.time(11, 50), 1)
+    time11w = Time(dt.time(11, 0), dt.time(11, 50), 3)
+    time1m = Time(dt.time(13, 0), dt.time(13, 50), 1)
+    time1w = Time(dt.time(13, 0), dt.time(13, 50), 3)
+    time2m = Time.query.get(1)
+    time2w = Time(dt.time(14, 0), dt.time(14, 50), 3)
+    s2t_17101_11m = SectionToTime(section171_1, time11m)
+    s2t_17101_11w = SectionToTime(section171_1, time11w)
+    s2t_17102_2m = SectionToTime(section171_2, time2m)
+    s2t_17102_2w = SectionToTime(section171_2, time2w)
+    s2t_17201_1m = SectionToTime(section172, time1m)
+    s2t_17201_1w = SectionToTime(section172, time1w)
+    db.session.add_all([course171, course172, section171_1, section171_2, section172, time11m, time11w, time1m, time1w,
+                       time2w, s2t_17101_11m, s2t_17101_11w, s2t_17102_2m, s2t_17102_2w, s2t_17201_1m, s2t_17201_1w])
     db.session.commit()
+    """
 
 
 def main():
