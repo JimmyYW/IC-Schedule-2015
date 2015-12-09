@@ -66,6 +66,7 @@ main {
     margin-top: 0;
 }
 
+
 p {
     color: #555;
 }
@@ -79,8 +80,4 @@ nav ul {
 nav ul a {
     color: darkgreen;
     text-decoration: none;
-}
-
-department ul a {
-
 }
