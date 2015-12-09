@@ -26,6 +26,7 @@
                   <h2>{{ course.name }}</h2>
                   <p>{{ course.desc }}</p>
                   <ul>
+                    <!--this displays ALL sections regardless of class unfortunately-->
                       {% for section in sections %}
                           <li>{{ section.crn }}</li>
                       {% endfor %}
@@ -33,7 +34,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Add class</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id=c{{ course.id }}">Add class</button>
               </div>
             </div>
           </div>
