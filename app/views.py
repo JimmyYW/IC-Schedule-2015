@@ -18,4 +18,4 @@ def schedule():
     clist = Course.query.all()
     sch = Schedulizer(clist)
     sch.generate_schedules()
-    return render_template('schedule.html', schlist=sch.sched_list)
+    return render_template('schedule.html', sch=sch)

@@ -89,8 +89,8 @@ class Schedulizer:
                 s1 = self.get_section_from_idx(i, current_idcs[i])
                 s2 = self.get_section_from_idx(j, current_idcs[j])
                 if self.find_conflicts(s1, s2):
-                    print("Schedule "+str(current_idcs)+" is invalid; "
-                          "sections "+str(s1)+" and "+str(s2)+" conflict.")
+                    # print("Schedule "+str(current_idcs)+" is invalid; "
+                    #       "sections "+str(s1)+" and "+str(s2)+" conflict.")
                     valid = False
                     break
 

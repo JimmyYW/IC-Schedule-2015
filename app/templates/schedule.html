@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 
 {% block course_content %}
-    {% for sch in schlist %}
+    {% for schedules in sch.sched_list %}
         <div class="hark-a-schedule">
-        {% for s in sch %}
-            <p>{{ s.prof }}, CRN {{ s.crn }}</p>
+        {% for section in schedules %}
+            <p>
+                <b>{{ section.prof }}, CRN {{ section.crn }}</b>
+                <ul>
+                {% for time in sch.sdict[section] %}
+                    <li>{{ time.timeStart }}-{{ time.timeEnd }} on day {{ time.day }}</li>
+                {% endfor %}
+                </ul>
+            </p>
         {% endfor %}
         </div>
     {% endfor %}
