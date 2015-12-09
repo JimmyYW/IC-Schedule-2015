@@ -98,3 +98,10 @@ nav ul a:hover {
     color: white;
     text-decoration: none;
 }
+
+.hark-a-schedule {
+    background-color: lightblue;
+    margin: 5px;
+    padding: 10px;
+    float: left;
+}

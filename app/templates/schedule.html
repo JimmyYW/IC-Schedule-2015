@@ -3,8 +3,10 @@
 {% block course_content %}
 
     {% for sch in schlist %}
+        <div class="hark-a-schedule">
         {% for s in sch %}
             <p>{{ s.prof }}, CRN {{ s.crn }}</p>
         {% endfor %}
+        </div>
     {% endfor %}
 {% endblock %}
