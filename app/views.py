@@ -19,4 +19,4 @@ def index():
 def schedule():
     sch = Schedulizer(Course.query.all())
     sch.generate_schedules()
-    return render_template('schedule_ext.html', schlist=sch.sched_list)
+    return render_template('schedule.html', schlist=sch.sched_list)

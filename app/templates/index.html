@@ -1,11 +1,41 @@
 {% extends "base.html" %}
+{% block sideNav %}
+<nav id="nav">
+    <div class="innertube">
+        <h3> </h3>
+        <ul>
+            <li><a href="#A">A</a></li>
+            <li><a href="#B">B</a></li>
+            <li><a href="#C">C</a></li>
+            <li><a href="#D">D</a></li>
+            <li><a href="#E">E</a></li>
+            <li><a href="#F">F</a></li>
+            <li><a href="#G">G</a></li>
+            <li><a href="#H">H</a></li>
+            <li><a href="#I">I</a></li>
+            <li><a href="#J">J</a></li>
+            <li><a href="#L">L</a></li>
+            <li><a href="#M">M</a></li>
+            <li><a href="#O">O</a></li>
+            <li><a href="#P">P</a></li>
+            <li><a href="#R">R</a></li>
+            <li><a href="#S">S</a></li>
+            <li><a href="#T">T</a></li>
+            <li><a href="#W">W</a></li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
 
 {% block dept_content %}
-<ul>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css')}}" type="text/css">
+
+
     {% for dept in depts %}
-        <li><button class="btn btn-primary btn-sm" id="{{ dept.name[0] }}">{{ dept.name }}</button></li>
+        <a href="#Department" id="{{ dept.name[0] }}">{{ dept.name }}</a>
     {% endfor %}
-</ul>
+
 {% endblock %}
 
 {% block course_content %}

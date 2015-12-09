@@ -101,7 +101,7 @@ class Schedulizer:
         if valid:
             # add that one last section that was good to schedule; couldn't be done before.
             schedule.append(self.get_section_from_idx(len(self.clist)-1, current_idcs[len(self.clist)-1]))
-            print("Good schedule: "+str(schedule))
+            # print("Good schedule: "+str(schedule))
             self.sched_list.append(schedule)
 
     def recursive_looping_sucks(self, maxes, current_idcs):
