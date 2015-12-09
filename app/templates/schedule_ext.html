@@ -1,0 +1,6 @@
+
+    {% for sch in schlist %}
+        {% for s in sch %}
+            <p>{{ s.prof }}, CRN {{ s.crn }}</p>
+        {% endfor %}
+    {% endfor %}
