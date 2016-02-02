@@ -6,8 +6,8 @@ body {
 }
 
 #header {
-    background: #ccc;
-    height: 100px;
+    background: #18426b;
+    height: 125px;
 }
 
 #header h1 {
@@ -26,44 +26,58 @@ main {
     padding-bottom: 10010px;
     margin-bottom: -10000px;
     float: left;
-    width: 50px;
+    width: 25px;
     margin-left: -100%;
-    background: #eee;
+    background: #18426b;
+    padding-left: 5px;
 }
 
 #classdiv {
     padding-bottom: 10010px;
     margin-bottom: -10000px;
+    min-height: 300px;
     float: right;
-    width: 800px;
+    width: 50%;
     margin-left: -100%;
-    background: #eee;
+    background: #e6e6e6;
+    padding-left: 5px;
+    padding-top: 5px;
 }
 
 #footer {
     clear: left;
     width: 100%;
-    background: #ccc;
+    height: 100%;
+    background: #18426b;
     text-align: center;
     padding: 4px 0;
 }
 
 #wrapper {
     overflow: hidden;
-}
-
-#department {
-    margin-left: 50px; /* Same as 'nav' width */
-    height: 300px
-    overflow-y: scroll;
-    overflow-x: hidden;
+    min-height: 100%;
     position: relative;
 }
 
-.innertube {
-    margin: 15px; /* Padding for department */
-    margin-top: 0;
+#department {
+    display: inline-block;
+    width: 50%;
+    margin-left: 25px; /* Same as 'nav' width */
+    height: 300px
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 5px;
 }
+
+#department a {
+    display: block;
+    color: #18426b;
+    background-color: #ffb700;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+}
+
 
 p {
     color: #555;
@@ -76,6 +90,18 @@ nav ul {
 }
 
 nav ul a {
-    color: darkgreen;
     text-decoration: none;
+    color: #ffb700;
+}
+
+nav ul a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.hark-a-schedule {
+    background-color: lightblue;
+    margin: 5px;
+    padding: 10px;
+    float: left;
 }

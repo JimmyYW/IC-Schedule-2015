@@ -4,7 +4,7 @@
 		<!--<meta http-equiv="department-Type" department="text/html; charset=utf-8">-->
 		<title>IC Schedulizer | {% block title %}{% endblock %}</title>
 
-        <link rel="stylesheet" href="../static/style.css" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css')}}" type="text/css">
         <link rel="stylesheet" href="../static/bootstrap.min.css"
                 type="text/css">
         <script type="text/javascript" src="../static/jquery.js"></script>
@@ -13,8 +13,8 @@
     <body>
 		<header id="header">
 			<div class="innertube">
-				<h1>IC Schedulizer</h1>
-                <p>Classes &nbsp;&nbsp;&nbsp;&nbsp; Schedules</p>
+                <a href="/index"><img src="{{ url_for('static', filename = 'img/header.jpg') }}"></a>
+                <p><a href="/index"><img src="../static/img/classes.jpg" href="/index" alt="Classes Button"></a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="/schedule"><img src="../static/img/schedule.jpg" alt="Schedule Button" href="/schedule"></a></p>
 			</div>
 		</header>
 
@@ -43,49 +43,18 @@
 				</div>
 			</main>
 
-
-			<nav id="nav">
-				<div class="innertube">
-					<h3> </h3>
-					<ul>
-						<li><a href="#A">A</a></li>
-						<li><a href="#B">B</a></li>
-						<li><a href="#C">C</a></li>
-						<li><a href="#D">D</a></li>
-						<li><a href="#E">E</a></li>
-						<li><a href="#F">F</a></li>
-						<li><a href="#G">G</a></li>
-						<li><a href="#H">H</a></li>
-						<li><a href="#I">I</a></li>
-						<li><a href="#J">J</a></li>
-						<li><a href="#L">L</a></li>
-						<li><a href="#M">M</a></li>
-						<li><a href="#O">O</a></li>
-						<li><a href="#P">P</a></li>
-						<li><a href="#R">R</a></li>
-						<li><a href="#S">S</a></li>
-						<li><a href="#T">T</a></li>
-						<li><a href="#W">W</a></li>
-
-
-					</ul>
-				</div>
-
-
-			</nav>
+			{% block sideNav %}{% endblock %}
 
 			<nav id="classdiv">
 				<div class="innertube">
 					{% block course_content %}{% endblock %}
 				</div>
-
-
 			</nav>
 
 		</div>
 		<footer id="footer">
 			<div class="innertube">
-				<p>Selected Classes</p>
+				<p><img src="../static/img/footer.jpg" alt="Scheduled Classes Footer"></p>
                 {% block selected_classes %}{% endblock %}
 			</div>
 		</footer>
