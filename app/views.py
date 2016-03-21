@@ -4,7 +4,14 @@ from flask import render_template, session, redirect, url_for
 from scheduling import Schedulizer
 
 
+
+
 @app.route('/')
+def landing():
+    return render_template('landing.html')
+
+
+
 @app.route('/index')
 def index():
     deptList = Dept.query.order_by('name')
